@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>কুরআন দিবসের ইতিকথা</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Serif+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --gold: #b8862a;
+    --gold-light: #d4a84b;
+    --gold-pale: #f5e9c8;
+    --cream: #fdf8ef;
+    --ivory: #faf4e6;
+    --rust: #8b2c2c;
+    --green: #1a4a2e;
+    --green-soft: #2d6a47;
+    --border: #c9a84c;
+    --text-main: #2c1a0a;
+    --text-muted: #6b4c2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--text-main);
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 17px;
+    line-height: 1.85;
+    overflow-x: hidden;
+  }
+
+  /* ── Grain overlay ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* ── Geometric pattern bg ── */
+  .pattern-bg {
+    position: fixed;
+    inset: 0;
+    opacity: 0.04;
+    background-image:
+      repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%),
+      repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Page wrapper ── */
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  /* ── Decorative top border ── */
+  .top-ornament {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeSlideDown 1s ease both;
+  }
+
+  .top-ornament svg {
+    width: 320px;
+    height: 40px;
+    overflow: visible;
+  }
+
+  /* ── Hero block ── */
+  .hero {
+    text-align: center;
+    padding: 60px 40px 50px;
+    background: linear-gradient(170deg, #1a3a28 0%, #0e2419 60%, #0a1c12 100%);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 70px;
+    animation: fadeSlideDown 1.1s ease 0.1s both;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184,134,42,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-bismillah {
+    font-family: 'Amiri', serif;
+    font-size: 32px;
+    color: var(--gold-light);
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 30px rgba(212,168,75,0.4);
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: clamp(26px, 5vw, 42px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+
+  .hero-subtitle {
+    font-family: 'Amiri', serif;
+    font-size: 15px;
+    color: rgba(212,168,75,0.75);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 24px;
+  }
+
+  .hero-corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-color: rgba(184,134,42,0.5);
+    border-style: solid;
+  }
+  .hero-corner.tl { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
+  .hero-corner.tr { top: 16px; right: 16px; border-width: 2px 2px 0 0; }
+  .hero-corner.bl { bottom: 16px; left: 16px; border-width: 0 0 2px 2px; }
+  .hero-corner.br { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
+
+  /* ── Opening verse ── */
+  .opening-verse {
+    background: var(--ivory);
+    border-left: 4px solid var(--gold);
+    border-right: 4px solid var(--gold);
+    padding: 32px 40px;
+    margin: 0 0 70px;
+    text-align: center;
+    position: relative;
+    animation: fadeSlideUp 1s ease 0.3s both;
+  }
+
+  .opening-verse::before,
+  .opening-verse::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 -40px;
+  }
+  .opening-verse::before { margin-bottom: 28px; }
+  .opening-verse::after { margin-top: 28px; }
+
+  .verse-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 22px;
+    color: var(--green);
+    line-height: 2;
+    margin-bottom: 14px;
+    direction: rtl;
+  }
+
+  .verse-bengali {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ── Section ── */
+  .section {
+    margin-bottom: 64px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Section heading ── */
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .heading-ornament {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+  }
+
+  .heading-ornament span {
+    display: block;
+    width: 14px;
+    height: 14px;
+    background: var(--gold);
+    transform: rotate(0deg);
+  }
+
+  .section-title {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green);
+    border-bottom: 2px solid var(--gold-pale);
+    padding-bottom: 8px;
+    flex: 1;
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), var(--rust), var(--green));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 32px;
+    background: #fff;
+    border: 1px solid rgba(184,134,42,0.2);
+    padding: 20px 24px;
+    border-radius: 1px;
+    box-shadow: 2px 2px 0 rgba(184,134,42,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .timeline-item:hover {
+    transform: translateX(4px);
+    box-shadow: 4px 4px 0 rgba(184,134,42,0.2);
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 22px;
+    width: 14px;
+    height: 14px;
+    background: var(--gold);
+    border: 2px solid var(--cream);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+
+  .timeline-date {
+    font-weight: 700;
+    color: var(--rust);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .timeline-date::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(184,134,42,0.25);
+  }
+
+  .timeline-item p {
+    font-size: 16px;
+    color: var(--text-main);
+    line-height: 1.8;
+  }
+
+  /* ── Shaheed block ── */
+  .shaheed-block {
+    background: linear-gradient(135deg, #2c0a0a 0%, #3d1010 100%);
+    border: 1px solid rgba(180,60,60,0.4);
+    padding: 36px 40px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shaheed-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(200,80,80,0.15) 0%, transparent 70%);
+  }
+
+  .shaheed-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255,200,180,0.9);
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .shaheed-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    position: relative;
+  }
+
+  .shaheed-name {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(200,100,100,0.3);
+    padding: 10px 14px;
+    font-size: 15px;
+    color: rgba(255,235,225,0.85);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .shaheed-name::before {
+    content: '☽';
+    color: rgba(200,150,100,0.8);
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  /* ── Quran cards ── */
+  .quran-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 640px) {
+    .quran-cards { grid-template-columns: 1fr; }
+    .page { padding: 30px 20px 80px; }
+    .hero { padding: 40px 24px; }
+    .opening-verse { padding: 24px 20px; }
+  }
+
+  .quran-card {
+    background: var(--ivory);
+    border: 1px solid rgba(184,134,42,0.3);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .quran-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(26,74,46,0.12);
+  }
+
+  .quran-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--green));
+  }
+
+  .card-number {
+    font-family: 'Amiri', serif;
+    font-size: 42px;
+    color: rgba(184,134,42,0.15);
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    line-height: 1;
+    font-weight: 700;
+  }
+
+  .card-text {
+    font-size: 15.5px;
+    line-height: 1.85;
+    color: var(--text-main);
+    position: relative;
+  }
+
+  .card-ref {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--green-soft);
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  /* ── Body prose ── */
+  .prose {
+    font-size: 16.5px;
+    line-height: 1.9;
+    color: var(--text-main);
+  }
+
+  .prose p { margin-bottom: 18px; }
+
+  .prose .highlight {
+    background: linear-gradient(120deg, rgba(212,168,75,0.12) 0%, rgba(212,168,75,0.06) 100%);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 16px;
+  }
+
+  /* ── Demands list ── */
+  .demands-list {
+    counter-reset: demand;
+    list-style: none;
+    padding: 0;
+  }
+
+  .demands-list li {
+    counter-increment: demand;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px dashed rgba(184,134,42,0.2);
+    font-size: 16px;
+    line-height: 1.75;
+    transition: background 0.2s;
+  }
+
+  .demands-list li:last-child { border-bottom: none; }
+
+  .demands-list li::before {
+    content: counter(demand);
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: var(--green);
+    color: var(--gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    transform: rotate(45deg);
+    margin-top: 2px;
+  }
+
+  .demands-list li span { flex: 1; }
+
+  /* ── Closing verse ── */
+  .closing-verse {
+    background: linear-gradient(160deg, #0e2419 0%, #162d1f 100%);
+    border: 1px solid rgba(184,134,42,0.3);
+    padding: 50px 48px;
+    text-align: center;
+    margin-top: 70px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing-verse::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 100%, rgba(184,134,42,0.12) 0%, transparent 70%);
+  }
+
+  .closing-verse .verse-arabic {
+    color: var(--gold-light);
+    font-size: 20px;
+    text-shadow: 0 0 20px rgba(212,168,75,0.3);
+    margin-bottom: 20px;
+  }
+
+  .closing-verse .verse-bengali {
+    color: rgba(245,233,200,0.75);
+    font-size: 15px;
+    position: relative;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .closing-dua {
+    font-size: 15px;
+    color: var(--gold-light);
+    margin-top: 28px;
+    font-weight: 600;
+    position: relative;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    text-align: center;
+    margin: 48px 0;
+    position: relative;
+  }
+
+  .divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .divider span {
+    position: relative;
+    background: var(--cream);
+    padding: 0 20px;
+    color: var(--gold);
+    font-family: 'Amiri', serif;
+    font-size: 28px;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Footer strip ── */
+  .footer-strip {
+    text-align: center;
+    padding: 28px;
+    margin-top: 60px;
+    border-top: 1px solid rgba(184,134,42,0.25);
+    color: var(--text-muted);
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  .footer-strip span {
+    color: var(--gold);
+    font-family: 'Amiri', serif;
+    font-size: 22px;
+    display: block;
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="pattern-bg"></div>
+
+<div class="page">
+
+  <!-- Top ornament -->
+  <div class="top-ornament">
+    <svg viewBox="0 0 320 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="20" x2="120" y2="20" stroke="#c9a84c" stroke-width="1"/>
+      <line x1="200" y1="20" x2="320" y2="20" stroke="#c9a84c" stroke-width="1"/>
+      <rect x="140" y="8" width="24" height="24" fill="none" stroke="#c9a84c" stroke-width="1.5" transform="rotate(45 152 20)"/>
+      <rect x="148" y="14" width="8" height="8" fill="#c9a84c" transform="rotate(45 152 18) translate(4 2)"/>
+      <circle cx="124" cy="20" r="3" fill="#c9a84c"/>
+      <circle cx="196" cy="20" r="3" fill="#c9a84c"/>
+      <circle cx="108" cy="20" r="2" fill="none" stroke="#c9a84c" stroke-width="1"/>
+      <circle cx="212" cy="20" r="2" fill="none" stroke="#c9a84c" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-corner tl"></div>
+    <div class="hero-corner tr"></div>
+    <div class="hero-corner bl"></div>
+    <div class="hero-corner br"></div>
+    <div class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <h1 class="hero-title">কুরআন দিবসের ইতিকথা</h1>
+    <p style="color:rgba(245,233,200,0.65); font-size:16px; max-width:520px; margin:0 auto; line-height:1.8;">সেই অগ্নিঝরা ইতিহাস — যেদিন কুরআনের সম্মানে বুকের রক্ত ঢেলে দিয়েছিল চাঁপাইনবাবগঞ্জের দামাল সন্তানেরা</p>
+    <p class="hero-subtitle">১১ মে ১৯৮৫ &nbsp;·&nbsp; চাঁপাইনবাবগঞ্জ &nbsp;·&nbsp; বাংলাদেশ</p>
+  </div>
+
+  <!-- Opening verse -->
+  <div class="opening-verse">
+    <div class="verse-arabic">ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ</div>
+    <div class="verse-bengali">"এটি আল্লাহর কিতাব, এর মধ্যে কোনো সন্দেহ নেই। এটি হিদায়াত সেই মুত্তাকীদের জন্য।"</div>
+    <div style="margin-top:10px; font-size:13px; color:var(--gold); letter-spacing:1px;">— সুরা আল-বাকারা: ২</div>
+  </div>
+
+
+  <!-- Section 1: Introduction -->
+  <div class="section">
+    <div class="prose">
+      <p>পৃথিবীবাসীকে ঘনঘোর আঁধিয়ার থেকে মুক্ত আলোকে নিয়ে আসার জন্য আল্লাহ রাব্বুল আলামিন নাযিল করেছেন মহাগ্রন্থ আল কুরআন। মানবজীবনের প্রতিটি বিষয়ের সুস্পষ্ট ইঙ্গিত রয়েছে এই কিতাবের আয়াতে আয়াতে; হরফে হরফে। এই কুরআন মানবজাতির জন্য হিদায়াত — মহান রবের পক্ষ থেকে এ এক শাশ্বত ফরমান।</p>
+    </div>
+  </div>
+
+  <div class="divider"><span>✦</span></div>
+
+  <!-- Section 2: Historical background -->
+  <div class="section">
+    <div class="section-heading">
+      <div class="heading-ornament"><span></span></div>
+      <h2 class="section-title">কুরআন দিবসের ঐতিহাসিক প্রেক্ষাপট</h2>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">১০ এপ্রিল, ১৯৮৫</div>
+        <p>ভারতের দুইজন উগ্র সাম্প্রদায়িকতার সমর্থক — পদ্মপল চোপরা ও শীতল সিং — কুরআনের সকল আরবি ও অনুবাদ কপি বাজেয়াপ্ত করার আবেদন জানিয়ে কলকাতা হাইকোর্টে রীট দাখিল করে। তারা সূরা বাকারার ১৯১ নং ও সূরা তাওবার ৩১ নং আয়াতকে "সাম্প্রদায়িক উসকানি" বলে দাবি করে।</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">১২ এপ্রিল, ১৯৮৫</div>
+        <p>বিচারপতি পদ্ম খাস্তগীর উদ্দেশ্যপ্রণোদিতভাবে মামলা গ্রহণ করে তিন সপ্তাহের মধ্যে এফিডেভিট দেওয়ার জন্য রাজ্য সরকারকে নির্দেশ দেন। খবর ছড়িয়ে পড়তেই সারা বিশ্বে প্রতিবাদের ঝড় ওঠে।</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">১০ মে, ১৯৮৫</div>
+        <p>বায়তুল মোকাররম মসজিদ থেকে জু'মার নামাজ শেষে হাজার হাজার ছাত্র-জনতার মিছিল বের হলে পুলিশ লাঠিচার্জ করে ছত্রভঙ্গ করে দেয়।</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">১১ মে, ১৯৮৫ — চাঁপাইনবাবগঞ্জ</div>
+        <p>ঈদগাহ ময়দানে প্রতিবাদ সমাবেশে ১৪৪ ধারা জারি করা হয়। নেতৃবৃন্দের শান্তিপূর্ণ আবেদন উপেক্ষা করে কুখ্যাত ম্যাজিস্ট্রেট ওয়াহিদুজ্জামান মোল্লার নির্দেশে কুরআনপ্রেমী জনতার ওপর সরাসরি গুলিবর্ষণ শুরু করে পুলিশ।</p>
+      </div>
+
+    </div>
+
+    <!-- Shaheed block -->
+    <div class="shaheed-block">
+      <div class="shaheed-title">শাহাদাতবরণকারী — আল্লাহর পথের ৮ বীর সন্তান</div>
+      <div class="shaheed-grid">
+        <div class="shaheed-name">আব্দুল মতিন (দশম শ্রেণি)</div>
+        <div class="shaheed-name">শীষ মোহাম্মদ</div>
+        <div class="shaheed-name">রশিদুল হক</div>
+        <div class="shaheed-name">সেলিম (অষ্টম শ্রেণি)</div>
+        <div class="shaheed-name">সাহাবুদ্দীন</div>
+        <div class="shaheed-name">আলতাফুর রহমান সবুর</div>
+        <div class="shaheed-name">মোক্তার হোসেন</div>
+        <div class="shaheed-name">নজরুল ইসলাম</div>
+      </div>
+      <p style="text-align:center; color:rgba(255,200,180,0.55); font-size:13px; margin-top:18px; position:relative;">শাহাদাত ৮ জন &nbsp;·&nbsp; আহত প্রায় অর্ধশতাধিক</p>
+    </div>
+
+    <div class="timeline" style="margin-top:40px;">
+      <div class="timeline-item">
+        <div class="timeline-date">১২–১৩ মে, ১৯৮৫</div>
+        <p>সকল বাধা অতিক্রম করে জনতার জোয়ার নামে চাঁপাইনবাবগঞ্জে। ১৩ মে হরতাল পালিত হয়। সর্বাত্মক প্রতিবাদের মুখে ১৩ মে ভারতীয় আদালতের বিচারপতি বিসি বাসক উদ্দেশ্যপ্রণোদিত রায়টি খারিজ করতে বাধ্য হন।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><span>✦</span></div>
+
+  <!-- Section 3: Ayat explanation -->
+  <div class="section">
+    <div class="section-heading">
+      <div class="heading-ornament"><span></span></div>
+      <h2 class="section-title">কুরআনের আয়াতের ভুল ধারণার অপনোদন</h2>
+    </div>
+
+    <div class="quran-cards">
+      <div class="quran-card">
+        <div class="card-number">১</div>
+        <div class="card-text">
+          <div style="font-family:'Amiri',serif; font-size:16px; direction:rtl; color:var(--green); margin-bottom:14px; line-height:2;">وَاقْتُلُوهُمْ حَيْثُ ثَقِفْتُمُوهُمْ...</div>
+          নরহত্যা নিঃসন্দেহে জঘন্য — কিন্তু যখন কোনো দল জোরপূর্বক স্বৈরতান্ত্রিক চিন্তা চাপিয়ে দেয়, সত্য গ্রহণ থেকে লোকদের বিরত রাখে, তখন সে নরহত্যার চেয়েও জঘন্য অন্যায়ে লিপ্ত হয়। আত্মরক্ষার অধিকার মানুষের সাধারণ অধিকার।
+          <div class="card-ref">সূরা আল-বাকারা: ১৯১</div>
+        </div>
+      </div>
+
+      <div class="quran-card">
+        <div class="card-number">২</div>
+        <div class="card-text">
+          <div style="font-family:'Amiri',serif; font-size:16px; direction:rtl; color:var(--green); margin-bottom:14px; line-height:2;">اتَّخَذُوا أَحْبَارَهُمْ وَرُهْبَانَهُمْ أَرْبَابًا...</div>
+          যারা আল্লাহর বিধানের পরিবর্তে মনগড়া সংবিধান অনুসরণ করে, তারা মূলত সেই দরবেশ-উলামাদের আল্লাহর আসনে বসিয়ে দেয়। একমাত্র স্রষ্টার ইবাদতের দিকে আহ্বান কখনও সাম্প্রদায়িক উসকানি হতে পারে না।
+          <div class="card-ref">সূরা আত-তাওবা: ৩১</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><span>✦</span></div>
+
+  <!-- Section 4: Quran's glory -->
+  <div class="section">
+    <div class="section-heading">
+      <div class="heading-ornament"><span></span></div>
+      <h2 class="section-title">আল-কুরআন: এক মহিমান্বিত কিতাব</h2>
+    </div>
+
+    <div class="quran-cards" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));">
+
+      <div class="quran-card">
+        <div class="card-number">১</div>
+        <div class="card-text">
+          <strong style="color:var(--green);">আল্লাহর পক্ষ থেকে ন
